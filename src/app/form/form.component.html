@@ -1,0 +1,71 @@
+<body class="formnew">
+ 
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 offset-md-3">
+      <h2>Fill your Information!</h2>
+      <form [formGroup]="userDetailsForm" (ngSubmit)="onSubmit()">  
+        
+        <div class="form-group"  [ngClass]="{
+          'has-danger': fullName.invalid && (fullName.dirty || fullName.touched),
+          'has-success': fullName.valid && (fullName.dirty || fullName.touched)
+        }">
+          <label>Name:</label>
+          <input type="text" name="fullName" class="form-control" formControlName="fullName" placeholder="Enter your name" required>
+          <div class="form-control-feedback"
+           *ngIf="fullName.errors && (fullName.dirty || fullName.touched)">
+        <p *ngIf="fullName.errors.required" class="errorMessage">First Name is required</p>
+          </div>
+        </div>
+        
+
+        <div class="form-group"  [ngClass]="{
+          'has-danger': email.invalid && (email.dirty || email.touched),
+          'has-success': email.valid && (email.dirty || email.touched)
+     }">
+          <label>Email:</label>
+          <input type="text" name="email" class="form-control" formControlName="email" placeholder="Enter your email" required>
+          <div class="form-control-feedback"
+          *ngIf="email.errors && (email.dirty || email.touched)">
+          <p *ngIf="email.errors.required" class="errorMessage">Email is required</p>
+          <p *ngIf="email.errors.pattern" class="errorMessage">The email address must contain at least the @ character</p>
+        </div>
+        </div>
+
+        <div class="form-group" >
+          <label>Contact:</label>
+          <input type="tel" name="contact" class="form-control" formControlName="contact" placeholder="Enter Contact No." minlength="10" maxlength="10" required>
+          <div class="form-control-feedback"
+          *ngIf="contact.errors && (contact.dirty || contact.touched)">
+          <p *ngIf="contact.errors.required" class="errorMessage">Contact number is required</p>
+          <p *ngIf="contact.errors.pattern" class="errorMessage">The contact number must contain only digits.</p>
+        </div>
+        </div>
+
+        <div class="form-group">
+          <label>Gender:</label> <br>
+          <input type="radio" name="gender" value="male" formControlName="gender" [checked]='true'> Male <br>
+          <input type="radio" name="gender" value="female" formControlName="gender"> Female
+        </div>
+      
+      
+
+       <div class="form-group" [ngClass]="{
+          'has-danger': message.invalid && (message.dirty || message.touched),
+          'has-success': message.valid && (message.dirty || message.touched)
+        }">
+          <label>Message:</label>
+          <textarea class="form-control" name="message" formControlName="message" rows="2" placeholder="Enter your message.." maxlength="256" required></textarea>
+          <div class="form-control-feedback"
+          *ngIf="message.errors && (message.dirty || message.touched)">
+       <p *ngIf="message.errors.required" class="errorMessage">Message is required</p>
+         </div>
+        </div>
+
+        <button type = "submit" id="submit" class="btn btn-primary btn-block" [disabled]="!userDetailsForm.valid"> Submit </button>       
+        </form>
+
+          
+          </div>
+    </div>
+  
